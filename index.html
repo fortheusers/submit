@@ -1,0 +1,256 @@
+<!--app submit for appstore by pwsincd-->
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Appstore submit</title>
+    <style>
+    body {
+        background-color: #414548;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    label{
+        color:white;
+    }
+    textarea {
+        width: 95%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    input[type=text], select {
+        width: 95%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    input[type=submit] {
+        width: 95%;
+        background-color: #303335;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button {
+        width: 95%;
+        background-color: #303335;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type=submit]:hover {
+        background-color: #ffffff;
+        color: #414548;
+    }
+    button:hover {
+        background-color: #ffffff;
+        color: #414548;        
+    }
+    a {
+        display:block;
+        background-color: #303335;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        overflow:auto;
+        text-decoration:none;
+    }
+    a:hover {
+        background-color: #ffffff;
+        color: #414548;
+    }
+    .form {
+        width:49%;
+        float:right;
+    }
+    .output {
+        position: fixed;
+        width:49%;
+        float:left;
+    }
+    #output {
+        width: 89%;
+        background-color: #ffffff;
+        color: black;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .app{
+        width: 100%;
+    }
+    #download {
+        width:95%;
+        text-align:center;
+    }
+</style>
+</head>
+<body>
+    <div class="app">
+        <div class="form">
+            <form id="hbform" action="#" method="post">
+                <div>
+                    <label>Application Title</label>
+                    <input type="text" name="title" id="title"/>
+                </div>
+                <div>
+                    <label>Author</label>
+                    <input type="text" name="author" id="author"/>
+                </div>
+                <div>
+                    <label>NEW or UPDATE</label>
+                    <select name="noru" id="noru">
+                        <option value="n/a" selected="selected">None</option>
+                        <option value="new">New</option>
+                        <option value="update">Update</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Category</label>
+                    <select name="category" id="category">
+                        <option value="n/a" selected="selected">None</option>
+                        <option value="tool">Tools</option>
+                        <option value="game">Games</option>
+                        <option value="loader">Loaders</option>
+                        <option value="emu">Emulators</option>
+                        <option value="concept">Concepts</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Version</label>
+                    <input type="text" name="version" id="version"/>
+                </div>
+                <div>
+                    <label>Source URL</label>
+                    <input type="text" name="url" id="url"/>
+                </div>
+                <div>
+                    <label>License</label>
+                    <select name="license" id="license">
+                        <option value="n/a" selected>None</option>
+                        <option value="Affero GPLv3">Affero GPLv3</option>
+                        <option value="Apache v2">Apache v2</option>
+                        <option value="BSD v2">BSD v2</option>
+                        <option value="BSD v3">BSD v3</option>
+                        <option value="Eclipse v2">Eclipse v2</option>
+                        <option value="GPLv2">GPL v2</option>
+                        <option value="GPLv3">GPL v3</option>
+                        <option value="Lesser GPLv2.1">Lesser GPLv2.1</option>
+                        <option value="Lesser GPLv3">Lesser GPLv3</option>
+                        <option value="MIT">MIT</option>
+                        <option value="Mozilla PLv2">Mozilla PLv2</option>
+                        <option value="The Unlicense">The Unlicense</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Short Description</label>
+                    <input type="text" name="description" id="description"/>
+                </div>
+            </div>
+            <div class="output">
+                <img id="icon" src="https://www.wiiubru.com/images/switch_ftu_icon.png" alt="For The Users" width=20% height=20%>
+                <div id="output"></div>         
+                <input type="submit" value="PREVIEW SUBMISSION"/>
+                <div id="subbutton"></div>
+                <div id="download"></div>    
+            </div>
+        </div>
+    </body>
+    <script>
+        var message = "<b>For the Users appstore APP submission.</b><br><br>To submit an app for inclusion on our appstore please fill out the form on the right.<br><br>Pressing <b>'PREVIEW SUBMISSION'</b> will finalise your application.<br><br>Then hit <b>'SUBMIT APP'</b> to send it to us.<br><br>You may also want to package an appstore ready JSON file to your source and maybe also an icon and banner.<b><br><br>icon.png dimensions are : 256 x 150 pixels (Switch).<br><br>icon.png dimensions are : 256 x 96 pixels (WiiU).<br><br>screen.png dimensions are : 848 x 208 pixels.<br><br></b><a href='https://www.wiiubru.com/jcreate.html'>JSON CREATOR</a><a href='https://www.wiiubru.com/images/appstore_image_templates.zip'>IMAGE TEMPLATES</a>";
+        var output = document.getElementById( "output" );
+        output.innerHTML = message;
+        /*Listen for form submission*/ 
+        document.addEventListener( "DOMContentLoaded", function() {
+            var form = document.getElementById( "hbform" );
+            form.addEventListener( "submit", function(e) {
+                e.preventDefault();
+                pre = previewsub();
+                output.innerHTML = pre;
+                var subbutton = '<button onclick="submit()">SUBMIT APP</button>';
+                document.getElementById("subbutton").innerHTML = subbutton;
+            }, false);
+        });
+        function submit() {
+            url = "https://hooks.zapier.com/hooks/catch/2441078/erm665/";
+            var title = document.getElementById("title").value;
+            if (title.length == 0) {
+                title = "no title entered";
+            } 
+            var author = document.getElementById("author").value;
+            if (author.length == 0) {
+                author = "no author entered";
+            }
+            var noru = document.getElementById("noru").value;
+            var category = document.getElementById("category").value;
+            var version = document.getElementById("version").value;
+            if (version.length == 0) {
+                version = "no version entered";
+            }
+            var appurl = document.getElementById("url").value;
+            var appurl2 = appurl
+            if (appurl.length == 0) {
+                appurl = "no URL entered";
+                appurl2 = "";
+            }
+            var license = document.getElementById("license").value;
+            var desc = document.getElementById("description").value;
+            if (desc.length == 0) {
+                desc = "no description entered";
+            }
+            var sub = "```NEW APP SUBMISSION```\n```TITLE : " + title + "\nAUTHOR : " + author + "\nNEW or UPDATE : " + noru + "\nCATEGORY : " + category + "\nVERSION : " + version + "\nLICENSE : " + license + "\nDESCRIPTION : " + desc + "\nAPP URL : " + appurl + "```\n" + appurl2;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            xhr.send(sub);
+            alert("Your app has been submitted to the team , thank you.");
+            document.getElementById("subbutton").innerHTML = "";
+        };
+        function previewsub() {
+            var title = document.getElementById("title").value;
+            if (title.length == 0) {
+                title = "no title entered";
+            } 
+            var author = document.getElementById("author").value;
+            if (author.length == 0) {
+                author = "no author entered";
+            }
+            var noru = document.getElementById("noru").value;
+            var category = document.getElementById("category").value;
+            var version = document.getElementById("version").value;
+            if (version.length == 0) {
+                version = "no version entered";
+            }
+            var appurl = document.getElementById("url").value;
+            var appurl2 = appurl
+            if (appurl.length == 0) {
+                appurl = "no URL entered";
+                appurl2 = "";
+            }
+            var license = document.getElementById("license").value;
+            var desc = document.getElementById("description").value;
+            if (desc.length == 0) {
+                desc = "no description entered";
+            }
+            var pre = "<b>NEW APP SUBMISSION<br><br>TITLE : </b>" + title + "<br><b>AUTHOR : </b>" + author + "<br><b>NEW or UPDATE</b> : " + noru + "<br><b>CATEGORY : </b>" + category + "<br><b>VERSION : </b>" + version + "<br><b>LICENSE : </b>" + license + "<br><b>DESCRIPTION : </b>" + desc + "<br><b>APP URL : </b>" + appurl;
+            return pre;
+        }        
+    </script>
+    </html>
