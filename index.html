@@ -224,7 +224,7 @@
             if (additional.length == 0) {
                 additional = "no additional info entered";
             }
-            var sub = "```NEW APP SUBMISSION```\n```TITLE : " + title + "\nAUTHOR : " + author + "\nNEW or UPDATE : " + noru + "\nCATEGORY : " + category + "\nVERSION : " + version + "\nLICENSE : " + license + "\nDESCRIPTION : " + desc + "\nAPP URL : " + appurl + "\nINFO :" + additional + "```\n" + appurl2 + "\n";
+            var sub = "```NEW APP SUBMISSION```\n```TITLE : " + title + "\nAUTHOR : " + author + "\nNEW or UPDATE : " + noru + "\nCATEGORY : " + category + "\nVERSION : " + version + "\nLICENSE : " + license + "\nDESCRIPTION : " + desc + "\nAPP URL : " + appurl + "```\n```" + additional + "```\n" + appurl2 + "\n";
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
