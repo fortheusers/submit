@@ -19,6 +19,7 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
+        height: 100px;
     }
     input[type=text], select {
         width: 95%;
@@ -55,7 +56,7 @@
     }
     button:hover {
         background-color: #ffffff;
-        color: #414548;        
+        color: #414548;
     }
     a {
         display:block;
@@ -111,7 +112,7 @@
                 </div>
                 <div>
                     <label>Author</label>
-                    <input type="text" name="author" id="author"/>
+                    <input type="text" name="author" id="author" placeholder=""/>
                 </div>
                 <div>
                     <label>NEW or UPDATE</label>
@@ -138,8 +139,8 @@
                     <input type="text" name="version" id="version"/>
                 </div>
                 <div>
-                    <label>Source URL</label>
-                    <input type="text" name="url" id="url"/>
+                    <label>Project URL</label>
+                    <input type="text" name="url" id="url" placeholder="A Github URL will allow for automatic update-releasing version checking"/>
                 </div>
                 <div>
                     <label>License</label>
@@ -161,15 +162,19 @@
                 </div>
                 <div>
                     <label>Short Description</label>
-                    <input type="text" name="description" id="description"/>
+                    <input type="text" name="description" id="description" placeholder="A one-line summary of your app (large summary will be created based off details from the project URL)"/>
+                </div>
+                <div>
+                    <label>Additional Info</label>
+                    <textarea maxlength="600" name="additional" id="additional" placeholder="Any additional information that we need to know about your app, including any special requirements (such as not overwriting certain config files on update), links to icon/banner assets, or a link to self-made info.json can be included here."></textarea>
                 </div>
             </div>
             <div class="output">
-                <img id="icon" src="https://www.wiiubru.com/images/switch_ftu_icon.png" alt="For The Users" width=20% height=20%>
-                <div id="output"></div>         
+                <img id="icon" src="https://www.wiiubru.com/images/switch_4tu_icon.png" alt="For The Users" width=20% height=20%>
+                <div id="output"></div>
                 <input type="submit" value="PREVIEW SUBMISSION"/>
                 <div id="subbutton"></div>
-                <div id="download"></div>    
+                <div id="download"></div>
             </div>
         </div>
     </body>
@@ -177,7 +182,7 @@
         var message = "<b>For the Users appstore APP submission.</b><br><br>To submit an app for inclusion on our appstore please fill out the form on the right.<br><br>Pressing <b>'PREVIEW SUBMISSION'</b> will finalise your application.<br><br>Then hit <b>'SUBMIT APP'</b> to send it to us.<br><br>You may also want to package an appstore ready JSON file to your source and maybe also an icon and banner.<b><br><br>icon.png dimensions are : 256 x 150 pixels (Switch).<br><br>icon.png dimensions are : 256 x 96 pixels (WiiU).<br><br>screen.png dimensions are : 848 x 208 pixels.<br><br></b><a href='https://jcreate.fortheusers.org'>JSON CREATOR</a><a href='https://www.wiiubru.com/images/appstore_image_templates.zip'>IMAGE TEMPLATES</a>";
         var output = document.getElementById( "output" );
         output.innerHTML = message;
-        /*Listen for form submission*/ 
+        /*Listen for form submission*/
         document.addEventListener( "DOMContentLoaded", function() {
             var form = document.getElementById( "hbform" );
             form.addEventListener( "submit", function(e) {
@@ -193,7 +198,7 @@
             var title = document.getElementById("title").value;
             if (title.length == 0) {
                 title = "no title entered";
-            } 
+            }
             var author = document.getElementById("author").value;
             if (author.length == 0) {
                 author = "no author entered";
@@ -215,7 +220,11 @@
             if (desc.length == 0) {
                 desc = "no description entered";
             }
-            var sub = "```NEW APP SUBMISSION```\n```TITLE : " + title + "\nAUTHOR : " + author + "\nNEW or UPDATE : " + noru + "\nCATEGORY : " + category + "\nVERSION : " + version + "\nLICENSE : " + license + "\nDESCRIPTION : " + desc + "\nAPP URL : " + appurl + "```\n" + appurl2;
+            var additional = document.getElementById("additional").value;
+            if (additional.length == 0) {
+                additional = "no additional info entered";
+            }
+            var sub = "```NEW APP SUBMISSION```\n```TITLE : " + title + "\nAUTHOR : " + author + "\nNEW or UPDATE : " + noru + "\nCATEGORY : " + category + "\nVERSION : " + version + "\nLICENSE : " + license + "\nDESCRIPTION : " + desc + "\nAPP URL : " + appurl + "\n" + appurl2 + "\n\nINFO: " + additional + "```\n";
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -227,7 +236,7 @@
             var title = document.getElementById("title").value;
             if (title.length == 0) {
                 title = "no title entered";
-            } 
+            }
             var author = document.getElementById("author").value;
             if (author.length == 0) {
                 author = "no author entered";
@@ -244,13 +253,17 @@
                 appurl = "no URL entered";
                 appurl2 = "";
             }
+            var additional = document.getElementById("additional").value;
+            if (additional.length == 0) {
+                additional = "no additional info entered";
+            }
             var license = document.getElementById("license").value;
             var desc = document.getElementById("description").value;
             if (desc.length == 0) {
                 desc = "no description entered";
             }
-            var pre = "<b>NEW APP SUBMISSION<br><br>TITLE : </b>" + title + "<br><b>AUTHOR : </b>" + author + "<br><b>NEW or UPDATE</b> : " + noru + "<br><b>CATEGORY : </b>" + category + "<br><b>VERSION : </b>" + version + "<br><b>LICENSE : </b>" + license + "<br><b>DESCRIPTION : </b>" + desc + "<br><b>APP URL : </b>" + appurl;
+            var pre = "<b>NEW APP SUBMISSION<br><br>TITLE : </b>" + title + "<br><b>AUTHOR : </b>" + author + "<br><b>NEW or UPDATE</b> : " + noru + "<br><b>CATEGORY : </b>" + category + "<br><b>VERSION : </b>" + version + "<br><b>LICENSE : </b>" + license + "<br><b>DESCRIPTION : </b>" + desc + "<br><b>APP URL : </b>" + appurl + "<br><br><b>MORE INFO</b>: " + additional;
             return pre;
-        }        
+        }
     </script>
     </html>
