@@ -118,8 +118,8 @@
                     <label>NEW or UPDATE</label>
                     <select name="noru" id="noru">
                         <!-- <option value="n/a">None</option> I feel like it should be new by default? -->
-                        <option value="new" selected="selected">New</option>
-                        <option value="update">Update</option>
+                        <option value="NEW" selected="selected">New</option>
+                        <option value="UPDATED">Update</option>
                     </select>
                 </div>
                 <div>
@@ -224,7 +224,7 @@
             if (additional.length == 0) {
                 additional = "no additional info entered";
             }
-            var sub = "```NEW APP SUBMISSION```\n```TITLE : " + title + "\nAUTHOR : " + author + "\nNEW or UPDATE : " + noru + "\nCATEGORY : " + category + "\nVERSION : " + version + "\nLICENSE : " + license + "\nDESCRIPTION : " + desc + "\nAPP URL : " + appurl + "```\n```" + additional + "```\n" + appurl2 + "\n";
+            var sub = "```" + noru + " APP SUBMISSION```\n```TITLE : " + title + "\nAUTHOR : " + author + "\nNEW or UPDATE : " + noru + "\nCATEGORY : " + category + "\nVERSION : " + version + "\nLICENSE : " + license + "\nDESCRIPTION : " + desc + "\nAPP URL : " + appurl + "```\n```" + additional + "```\n" + appurl2 + "\n";
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -262,7 +262,7 @@
             if (desc.length == 0) {
                 desc = "no description entered";
             }
-            var pre = "<b>NEW APP SUBMISSION<br><br>TITLE : </b>" + title + "<br><b>AUTHOR : </b>" + author + "<br><b>NEW or UPDATE</b> : " + noru + "<br><b>CATEGORY : </b>" + category + "<br><b>VERSION : </b>" + version + "<br><b>LICENSE : </b>" + license + "<br><b>DESCRIPTION : </b>" + desc + "<br><b>APP URL : </b>" + appurl + "<br><br><b>MORE INFO</b>: " + additional;
+            var pre = "<b>" +noru + " APP SUBMISSION<br><br>TITLE : </b>" + title + "<br><b>AUTHOR : </b>" + author + "<br><b>NEW or UPDATE</b> : " + noru + "<br><b>CATEGORY : </b>" + category + "<br><b>VERSION : </b>" + version + "<br><b>LICENSE : </b>" + license + "<br><b>DESCRIPTION : </b>" + desc + "<br><b>APP URL : </b>" + appurl + "<br><br><b>MORE INFO</b>: " + additional;
             return pre;
         }
     </script>
