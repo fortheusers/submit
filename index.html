@@ -108,11 +108,15 @@
             <form id="hbform" action="#" method="post">
                 <div>
                     <label>Application Title</label>
-                    <input type="text" name="title" id="title"/>
+                    <input type="text" name="title" id="title"/ required>
                 </div>
                 <div>
                     <label>Author</label>
-                    <input type="text" name="author" id="author" placeholder=""/>
+                    <input type="text" name="author" id="author" placeholder=""/ required>
+                </div>
+                <div>
+                    <label>Contact Info</label>
+                    <input type="text" name="contact" id="contact" placeholder="Discord or other username so we can contact you"/ required>
                 </div>
                 <div>
                     <label>NEW or UPDATE</label>
@@ -140,7 +144,7 @@
                 </div>
                 <div>
                     <label>Project URL</label>
-                    <input type="text" name="url" id="url" placeholder="A Github URL will allow for automatic update-releasing version checking"/>
+                    <input type="text" name="url" id="url" placeholder="A Github URL will allow for automatic update-releasing version checking"/ required>
                 </div>
                 <div>
                     <label>License</label>
@@ -158,11 +162,12 @@
                         <option value="MIT">MIT</option>
                         <option value="Mozilla PLv2">Mozilla PLv2</option>
                         <option value="The Unlicense">The Unlicense</option>
+                        <option value="BEER-WARE">BEER WARE</option>
                     </select>
                 </div>
                 <div>
                     <label>Short Description</label>
-                    <input type="text" name="description" id="description" placeholder="A one-line summary of your app (large summary will be created based off details from the project URL)"/>
+                    <input type="text" name="description" id="description" placeholder="A one-line summary of your app (large summary will be created based off details from the project URL)"/ required>
                 </div>
                 <div>
                     <label>Additional Info</label>
@@ -203,6 +208,7 @@
             if (author.length == 0) {
                 author = "no author entered";
             }
+            var contact = document.getElementById("contact").value;
             var noru = document.getElementById("noru").value;
             var category = document.getElementById("category").value;
             var version = document.getElementById("version").value;
@@ -224,13 +230,15 @@
             if (additional.length == 0) {
                 additional = "no additional info entered";
             }
-            var sub = "```" + noru + " APP SUBMISSION```\n```TITLE : " + title + "\nAUTHOR : " + author + "\nNEW or UPDATE : " + noru + "\nCATEGORY : " + category + "\nVERSION : " + version + "\nLICENSE : " + license + "\nDESCRIPTION : " + desc + "\nAPP URL : " + appurl + "```\n```" + additional + "```\n" + appurl2 + "\n";
+            var sub = "```" + noru + " APP SUBMISSION FROM " + window.ip + "```\n```TITLE : " + title + "\nAUTHOR : " + author + "\nCONTACT INFO : " + contact + "\nNEW or UPDATE : " + noru + "\nCATEGORY : " + category + "\nVERSION : " + version + "\nLICENSE : " + license + "\nDESCRIPTION : " + desc + "\nAPP URL : " + appurl + "```\n```" + additional + "```\n" + appurl2 + "\n";
+
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
             xhr.send(sub);
             alert("Your app has been submitted to the team , thank you.");
             document.getElementById("subbutton").innerHTML = "";
+            
         };
         function previewsub() {
             var title = document.getElementById("title").value;
@@ -241,6 +249,7 @@
             if (author.length == 0) {
                 author = "no author entered";
             }
+            var contact = document.getElementById("contact").value;
             var noru = document.getElementById("noru").value;
             var category = document.getElementById("category").value;
             var version = document.getElementById("version").value;
@@ -261,9 +270,13 @@
             var desc = document.getElementById("description").value;
             if (desc.length == 0) {
                 desc = "no description entered";
-            }
-            var pre = "<b>" +noru + " APP SUBMISSION<br><br>TITLE : </b>" + title + "<br><b>AUTHOR : </b>" + author + "<br><b>NEW or UPDATE</b> : " + noru + "<br><b>CATEGORY : </b>" + category + "<br><b>VERSION : </b>" + version + "<br><b>LICENSE : </b>" + license + "<br><b>DESCRIPTION : </b>" + desc + "<br><b>APP URL : </b>" + appurl + "<br><br><b>MORE INFO</b>: " + additional;
+            };
+            var pre = "<b>" +noru + " APP SUBMISSION FROM " + window.ip + "<br><br>TITLE : </b>" + title + "<br><b>AUTHOR : </b>" + author + "<br><b>CONTACT INFO : </b>" + contact + "<br><b>NEW or UPDATE</b> : " + noru + "<br><b>CATEGORY : </b>" + category + "<br><b>VERSION : </b>" + version + "<br><b>LICENSE : </b>" + license + "<br><b>DESCRIPTION : </b>" + desc + "<br><b>APP URL : </b>" + appurl + "<br><br><b>MORE INFO</b>: " + additional;
             return pre;
+        };
+        function getIP(json) {
+            window.ip = json.ip;
         }
     </script>
+    <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
     </html>
